@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Anjumiee✨</title>
+  <meta name="description"
+    content="A cute magical birthday countdown and wish website for Anjum with an interactive candle-blowing teddy bear!" />
+  <!-- Google Fonts: Quicksand & Fredoka for ultra-cute aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Sacramento&display=swap"
+    rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Ambient floating particles & stars -->
+  <div id="stars-container" class="stars-container"></div>
+  <div id="balloons-container" class="balloons-container"></div>
+
+
+  <main class="page-wrapper">
+    <!-- HERO SECTION -->
+    <header class="hero-section">
+      <h1 class="main-title">
+        Happy Birthday, <span class="highlight-name" id="display-name">Anjum</span>!
+      </h1>
+      <p class="subtitle" id="subtitle-text">
+        Counting down every precious second until your special moment arrives! 💖
+        You are gonna be 21 or 22?? Obviouslyyy 21!!
+      </p>
+    </header>
+
+    <!-- COUNTDOWN CARD -->
+    <section class="card countdown-card" id="countdown-section">
+      <div class="card-header">
+        <span class="card-icon"></span>
+        <h2 id="countdown-title">12 mani epo aavum hee??? </h2>
+      </div>
+
+      <div class="timer-grid" id="timer-grid">
+        <div class="time-box">
+          <div class="time-digit" id="hours">00</div>
+          <div class="time-label">Hours</div>
+        </div>
+        <div class="timer-separator">:</div>
+        <div class="time-box">
+          <div class="time-digit" id="minutes">00</div>
+          <div class="time-label">Mins</div>
+        </div>
+        <div class="timer-separator">:</div>
+        <div class="time-box">
+          <div class="time-digit" id="seconds">00</div>
+          <div class="time-label">Secs</div>
+        </div>
+      </div>
+
+      <div class="countdown-footer">
+        <p class="target-hint" id="target-hint">Target Time: Midnight 12:00 AM 🌙</p>
+        <button id="preview-midnight-btn" class="btn-secondary"
+          title="Preview the midnight birthday surprise instantly!">
+          <span>Midnight Celebration aayaloo?click me bro🎉</span>
+        </button>
+      </div>
+
+      <!-- Celebration Banner (Revealed at midnight or on preview) -->
+      <div id="midnight-banner" class="midnight-banner hidden">
+        <h3 class="banner-title">IT'S 12:00 AM! HAPPY BIRTHDAY!</h3>
+        <p class="banner-sub">Today is all about celebrating the wonderful, incredible YOU! 💖</p>
+        <button id="music-toggle-btn" class="music-toggle-btn" title="Toggle Music Box">
+          <span id="music-toggle-icon">🎵</span> <span id="music-toggle-text">Pause Music</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE TEDDY & CAKE SECTION -->
+    <section class="card teddy-stage-card">
+      <div class="stage-header">
+        <span class="card-icon"></span>
+        <h2>Make a Birthday Wish!</h2>
+        <p class="stage-sub">Our little teddy brought you a cake! Make a wish in your heart, then blow out the candle
+          🕯️</p>
+      </div>
+
+      <!-- Teddy Stage -->
+      <div class="stage-arena" id="stage-arena">
+
+        <!-- Floating speech bubble for teddy -->
+        <div class="teddy-bubble" id="teddy-bubble">
+          <span>Make a wish, Anjum! 🎂✨</span>
+        </div>
+
+        <div class="teddy-and-cake-wrapper">
+          <!-- TEDDY BEAR SVG / VECTOR -->
+          <div class="teddy-character" id="teddy-character">
+            <svg class="teddy-svg" viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Soft fur gradients -->
+                <radialGradient id="furGrad" cx="40%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#E8C39E" />
+                  <stop offset="70%" stop-color="#C69263" />
+                  <stop offset="100%" stop-color="#A56E3F" />
+                </radialGradient>
+                <radialGradient id="earInnerGrad" cx="45%" cy="40%" r="60%">
+                  <stop offset="0%" stop-color="#FFD7D7" />
+                  <stop offset="100%" stop-color="#F4A7B9" />
+                </radialGradient>
+                <radialGradient id="snoutGrad" cx="50%" cy="35%" r="60%">
+                  <stop offset="0%" stop-color="#FFF2E2" />
+                  <stop offset="100%" stop-color="#F2D8BD" />
+                </radialGradient>
+                <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <!-- Teddy Ears -->
+              <g class="teddy-ears">
+                <!-- Left Ear -->
+                <circle cx="55" cy="62" r="30" fill="url(#furGrad)" stroke="#8C582B" stroke-width="2.5" />
+                <circle cx="56" cy="63" r="17" fill="url(#earInnerGrad)" />
+                <!-- Right Ear -->
+                <circle cx="185" cy="62" r="30" fill="url(#furGrad)" stroke="#8C582B" stroke-width="2.5" />
+                <circle cx="184" cy="63" r="17" fill="url(#earInnerGrad)" />
+              </g>
+
+              <!-- Teddy Body -->
+              <ellipse cx="120" cy="195" rx="72" ry="60" fill="url(#furGrad)" stroke="#8C582B" stroke-width="2.5" />
+              <!-- Tummy Patch -->
+              <ellipse cx="120" cy="198" rx="46" ry="40" fill="url(#snoutGrad)" opacity="0.9" />
+
+              <!-- Cute Bow Tie -->
+              <g class="teddy-bowtie" transform="translate(120, 148)">
+                <path d="M-22,-10 C-18,-2 -18,2 -22,10 L0,0 Z" fill="#FF6B8B" />
+                <path d="M22,-10 C18,-2 18,2 22,10 L0,0 Z" fill="#FF6B8B" />
+                <circle cx="0" cy="0" r="5" fill="#FFE082" />
+              </g>
+
+              <!-- Teddy Head -->
+              <g class="teddy-head" id="teddy-head">
+                <ellipse cx="120" cy="100" rx="66" ry="58" fill="url(#furGrad)" stroke="#8C582B" stroke-width="2.5" />
+
+                <!-- Cute Snout -->
+                <ellipse cx="120" cy="115" rx="28" ry="20" fill="url(#snoutGrad)" />
+                <!-- Nose -->
+                <path d="M112,106 Q120,102 128,106 Q120,116 112,106 Z" fill="#4A2E18" />
+
+                <!-- Mouth (Changes when blowing!) -->
+                <path id="teddy-mouth" class="teddy-mouth-idle" d="M112,118 Q120,126 128,118" fill="none"
+                  stroke="#4A2E18" stroke-width="2.5" stroke-linecap="round" />
+
+                <!-- Cute Blushing Cheeks (Glows brighter when blowing!) -->
+                <ellipse id="blush-left" class="teddy-blush" cx="76" cy="115" rx="13" ry="8" fill="#FF9EAA"
+                  opacity="0.6" />
+                <ellipse id="blush-right" class="teddy-blush" cx="164" cy="115" rx="13" ry="8" fill="#FF9EAA"
+                  opacity="0.6" />
+
+                <!-- Eyes with Sparkles -->
+                <g class="teddy-eyes" id="teddy-eyes">
+                  <!-- Left Eye -->
+                  <circle cx="92" cy="94" r="8.5" fill="#361E10" />
+                  <circle cx="89" cy="91" r="3.2" fill="#FFFFFF" />
+                  <circle cx="95" cy="97" r="1.5" fill="#FFFFFF" />
+
+                  <!-- Right Eye -->
+                  <circle cx="148" cy="94" r="8.5" fill="#361E10" />
+                  <circle cx="145" cy="91" r="3.2" fill="#FFFFFF" />
+                  <circle cx="151" cy="97" r="1.5" fill="#FFFFFF" />
+                </g>
+              </g>
+
+              <!-- Teddy Paws hugging the table -->
+              <ellipse cx="64" cy="180" rx="18" ry="16" fill="url(#furGrad)" stroke="#8C582B" stroke-width="2" />
+              <ellipse cx="64" cy="182" rx="11" ry="9" fill="url(#earInnerGrad)" opacity="0.8" />
+
+              <ellipse cx="176" cy="180" rx="18" ry="16" fill="url(#furGrad)" stroke="#8C582B" stroke-width="2" />
+              <ellipse cx="176" cy="182" rx="11" ry="9" fill="url(#earInnerGrad)" opacity="0.8" />
+            </svg>
+
+            <!-- Wind gust breath animation (hidden until blow) -->
+            <div class="blow-wind" id="blow-wind">
+              <span class="wind-particle w1">💨</span>
+              <span class="wind-particle w2">✨</span>
+              <span class="wind-particle w3">💨</span>
+            </div>
+          </div>
+
+          <!-- THE CAKE & CANDLE -->
+          <div class="cake-container" id="cake-container">
+            <!-- Plate -->
+            <div class="cake-plate"></div>
+
+            <!-- Cake Layers -->
+            <div class="cake-body">
+              <div class="cake-top-layer">
+                <div class="frosting-drips">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="strawberries">
+                  <span class="berry">🍓</span>
+                  <span class="berry">🍓</span>
+                  <span class="berry">🍓</span>
+                </div>
+              </div>
+              <div class="cake-bottom-layer">
+                <div class="cream-decor"></div>
+              </div>
+            </div>
+
+            <!-- CANDLE & FLAME -->
+            <div class="candle" id="candle" title="Tap candle to blow or relight!">
+              <div class="candle-wick"></div>
+
+              <!-- Candle Flame -->
+              <div class="flame-wrapper" id="flame-wrapper">
+                <div class="flame-glow"></div>
+                <div class="flame-outer"></div>
+                <div class="flame-inner"></div>
+              </div>
+
+              <!-- Smoke element when blown out -->
+              <div class="smoke-trail" id="smoke-trail">
+                <span class="smoke-puff s1"></span>
+                <span class="smoke-puff s2"></span>
+                <span class="smoke-puff s3"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Action Buttons -->
+        <div class="stage-controls">
+          <button id="blow-btn" class="btn-primary glow-btn">
+            <span class="btn-icon"></span>
+            <span id="blow-btn-text">Blow Out the Candle!</span>
+          </button>
+          <button id="relight-btn" class="btn-secondary hidden" title="Light it up again!">
+            <span class="btn-icon"></span>
+            <span>Relight Candle</span>
+          </button>
+        </div>
+
+        <div class="wish-reveal-toast" id="wish-toast">
+          Wish granted! May your year be filled with laughter, love & endless joy! whatever you wish for ath elam
+          nadakkte💖
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIAL BIRTHDAY LETTER / WISHES SECTION -->
+    <section class="card letter-card">
+      <div class="card-header">
+        <span class="card-icon">💌</span>
+        <h2>A Little Note for You</h2>
+      </div>
+
+      <div class="envelope-wrapper" id="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <div class="envelope-flap"></div>
+          <div class="envelope-pocket"></div>
+
+          <div class="letter" id="letter">
+            <div class="letter-content">
+              <div class="letter-seal-top">🌸 Happy Birthday 🌸</div>
+              <h3 class="letter-greeting">Dearest <span id="letter-name">Anjum</span>,</h3>
+              <p class="letter-body" id="letter-body-text">
+                On this wonderful day, I wish you endless happiness, beautiful moments, and all the love your heart can
+                hold. May your dreams come true this year and always in your life!!
+                <br><br>
+                I thought I always made handmade cards.. what if i make something kinda website so you can maybe see
+                again
+                or save the link for memoriessss 🌸
+                <br><br>
+                Thank you for being such an extraordinary, kind-hearted, and bright soul in this world. Never stop
+                loving me hehe :) Putting efforts for you is worth it bro !! Love youuuu...
+              </p>
+              <div class="letter-signature">
+                With warmest wishes & love,<br>
+                <span class="sig-name" id="sig-name">Always Cheering for You,Pavi✨</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="envelope-front">
+            <div class="heart-stamp" id="heart-stamp">
+              <span class="stamp-icon">💖</span>
+              <span class="stamp-text">Open Note</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="envelope-hint">Tap the heart envelope to unfold your birthday letter! ✉️</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <p>Apo engne ond surprisssseeeee??<strong id="footer-name">Anjum</strong> 💖</p>
+      <p class="small-credit"><b></b>Have the happiest birthday ever! for offline gifts pick up a date and contact
+        @pavithrakishore </b></p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
